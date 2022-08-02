@@ -1,6 +1,4 @@
-import os
 import requests
-import json
 import pyttsx3
 import speech_recognition as sr
 import re
@@ -78,8 +76,9 @@ def get_audio():
 def main():
 	data = Data()
 	country_list = data.get_list_of_countries()
-	END_PHRASE = "stop"
-	print("Started Program")
+	END_PHRASE = "exit"
+	END_MSG = "Thankyou for using COVI-WARE!!!"
+	speak("Welcome To COVI-WARE")
 
 	TOTAL_PATTERNS = {
 					re.compile("[\w\s]+ total [\w\s]+ cases"): data.get_TotalCases,
@@ -97,7 +96,7 @@ def main():
                     	}
 
 	while True:
-		print("Listening...")
+		speak("Listening...")
 		text = get_audio()
 		print(text)
 		result = None
@@ -119,7 +118,7 @@ def main():
 			speak(result)
 
 		if text.find(END_PHRASE) != -1:
-			print("Exit")
+			speak(END_MSG)
 			break
 
 main()
